@@ -1,0 +1,52 @@
+start -> BEGIN def N laczenie END
+
+
+def -> ID EQ keyw  def
+def -> EMP
+
+
+keyw -> VOLTAGESOURCE vector_emp
+keyw ->VOLTAGEPROBE vector_emp
+keyw ->CURRENTSOURCE vector_emp
+keyw ->CURRENTPROBE vector_emp
+keyw ->RESISTOR vector
+keyw ->CAPACITOR vector
+keyw ->INDUCTOR vector
+keyw ->DIODE vector_multi_emp
+
+
+vector_emp -> PO value PC
+vector_emp -> PO PC
+
+vector -> PO value_must PC
+
+vector_multi_emp -> PO vector_multi_emp_count PC
+vector_multi_emp -> PO PC
+
+vector_multi_emp_count -> ID EQ value vector_multi_emp_count_next
+
+vector_next -> COMA ID EQ value vector_multi_emp_count_next
+vector_next -> EMP
+
+value -> INT
+value -> REAL 
+value -> ID
+value -> pow
+
+pow-> E
+
+
+connection -> connection_value connection_next
+connection -> EMP
+
+connection_value -> ID SBO INT SBC
+connection_value -> gnd
+
+connection_next -> CON connection_value connection_next
+connection_next -> EMP
+
+# SBO - otwarcie nawiasu kwadrwotwego , SBC - zamkniecie 
+# PO - otwarcie nawiasu zwyklego, PC- zamkniecie
+#\n jako N
+#-- jako CON
+#e jako E
